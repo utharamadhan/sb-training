@@ -12,6 +12,13 @@ public class Response implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6143474484193228992L;
+	
+	public static final String RC_SUCCESS 	= "00";
+	public static final String RC_NOT_FOUND = "04";
+	public static final String RC_ERROR		= "10";
+	
+	public static final String RD_SUCCESS 	= "success";
+	public static final String RD_NOT_FOUND	= "not found";
 
 	@JsonProperty("responseCode")
 	private String responseCode;

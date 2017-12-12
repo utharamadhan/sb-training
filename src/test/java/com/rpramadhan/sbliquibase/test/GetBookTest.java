@@ -43,7 +43,7 @@ public class GetBookTest {
 				@Override
 				public void match(MvcResult result) throws Exception {
 					Response response = mapper.readValue(result.getResponse().getContentAsString(), Response.class);
-					Assert.assertEquals("00", response.getResponseCode());
+					Assert.assertEquals(Response.RC_SUCCESS, response.getResponseCode());
 					Assert.assertEquals("success", response.getResponseDesc());
 					Book book = mapper.readValue(mapper.writeValueAsString(response.getResult()), Book.class);
 					Assert.assertEquals("How To Win Friends And Influence People", book.getTitle());

@@ -8,6 +8,7 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
      
     <changeSet author="rpramadhan" id="1.0">
+    	
     	<createTable tableName="book">
             <column name="pk_book" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -19,6 +20,22 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        
+        <insert schemaName="public" tableName="book">
+        	<column name="title" value="How To Win Friends And Influence People"/>
+        	<column name="author" value="Dale Carnegie"/>
+    	</insert>
+    	
+    	<insert schemaName="public" tableName="book">
+        	<column name="title" value="Outliers"/>
+        	<column name="author" value="Malcolm Gladwell"/>
+    	</insert>
+    	
+    	<insert schemaName="public" tableName="book">
+        	<column name="title" value="Man’s Search for Meaning"/>
+        	<column name="author" value="Viktor E. Frankl"/>
+    	</insert>
+    	
     </changeSet>
      
 </databaseChangeLog>

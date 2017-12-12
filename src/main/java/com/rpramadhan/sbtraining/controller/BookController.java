@@ -24,13 +24,13 @@ public class BookController {
 		Response resp = new Response();
 		Book book = service.findById(id);
 		if (book != null) {
-			resp.setResponseCode("00");
-			resp.setResponseDesc("success");
+			resp.setResponseCode(Response.RC_SUCCESS);
+			resp.setResponseDesc(Response.RD_SUCCESS);
 			resp.setResult(book);
-			return ResponseEntity.accepted().body(resp);
+			return ResponseEntity.ok().body(resp);
 		} else {
-			resp.setResponseCode("04");
-			resp.setResponseDesc("not found");
+			resp.setResponseCode(Response.RC_NOT_FOUND);
+			resp.setResponseDesc(Response.RD_NOT_FOUND);
 			return ResponseEntity.badRequest().body(resp);
 		}
 	}
@@ -41,15 +41,15 @@ public class BookController {
 		try {
 			validateBook(book);
 			service.saveOrUpdate(book);
-			resp.setResponseCode("00");
-			resp.setResponseDesc("success");
+			resp.setResponseCode(Response.RC_SUCCESS);
+			resp.setResponseDesc(Response.RD_SUCCESS);
 			resp.setResult(book);
-			return ResponseEntity.accepted().body(resp);
+			return ResponseEntity.ok().body(resp);
 		} catch (IllegalArgumentException argEx){
-			resp.setResponseCode("10");
+			resp.setResponseCode(Response.RC_ERROR);
 			resp.setResponseDesc(argEx.getMessage());
 		} catch (Exception ex) {
-			resp.setResponseCode("04");
+			resp.setResponseCode(Response.RC_NOT_FOUND);
 			resp.setResponseDesc(ex.getMessage());
 		}
 		return ResponseEntity.badRequest().body(resp);
@@ -61,15 +61,15 @@ public class BookController {
 		try {
 			validateEditBook(id, book);
 			service.saveOrUpdate(book);
-			resp.setResponseCode("00");
-			resp.setResponseDesc("success");
+			resp.setResponseCode(Response.RC_SUCCESS);
+			resp.setResponseDesc(Response.RD_SUCCESS);
 			resp.setResult(book);
 			return ResponseEntity.accepted().body(resp);
 		} catch (IllegalArgumentException argEx){
-			resp.setResponseCode("10");
+			resp.setResponseCode(Response.RC_ERROR);
 			resp.setResponseDesc(argEx.getMessage());
 		} catch (Exception ex) {
-			resp.setResponseCode("04");
+			resp.setResponseCode(Response.RC_NOT_FOUND);
 			resp.setResponseDesc(ex.getMessage());
 		}
 		return ResponseEntity.badRequest().body(resp);

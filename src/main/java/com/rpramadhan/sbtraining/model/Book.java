@@ -2,8 +2,18 @@ package com.rpramadhan.sbtraining.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Entity(name="book")
+@Table(name="book")
 public class Book implements Serializable {
 	/**
 	 * 
@@ -24,13 +34,20 @@ public class Book implements Serializable {
 		return Book.createInstance(null, title, author);
 	}
 	
+	@Id
 	@JsonProperty("id")
+	@SequenceGenerator(name = "book_pk_book_seq", sequenceName = "book_pk_book_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_pk_book_seq")
+	@Column(name = "pk_book", unique = true, nullable = false)
 	private Long id;
 	
+	
 	@JsonProperty("title")
+	@Column(name = "title")
 	private String title;
 	
 	@JsonProperty("author")
+	@Column(name = "author")
 	private String author;
 	
 	public Long getId() {

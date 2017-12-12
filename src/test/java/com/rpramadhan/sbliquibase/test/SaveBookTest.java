@@ -46,8 +46,8 @@ public class SaveBookTest {
 				@Override
 				public void match(MvcResult result) throws Exception {
 					Response response = mapper.readValue(result.getResponse().getContentAsString(), Response.class);
-					Assert.assertEquals("00", response.getResponseCode());
-					Assert.assertEquals("success", response.getResponseDesc());
+					Assert.assertEquals(Response.RC_SUCCESS, response.getResponseCode());
+					Assert.assertEquals(Response.RD_SUCCESS, response.getResponseDesc());
 					Book book = mapper.readValue(mapper.writeValueAsString(response.getResult()), Book.class);
 					Assert.assertNotNull(book.getId());
 					Assert.assertEquals(_title, book.getTitle());
@@ -65,7 +65,7 @@ public class SaveBookTest {
 				@Override
 				public void match(MvcResult result) throws Exception {
 					Response response = mapper.readValue(result.getResponse().getContentAsString(), Response.class);
-					Assert.assertEquals("10", response.getResponseCode());
+					Assert.assertEquals(Response.RC_ERROR, response.getResponseCode());
 					Assert.assertEquals("title is required", response.getResponseDesc());
 				}
 			});
@@ -77,7 +77,7 @@ public class SaveBookTest {
 			@Override
 			public void match(MvcResult result) throws Exception {
 				Response response = mapper.readValue(result.getResponse().getContentAsString(), Response.class);
-				Assert.assertEquals("10", response.getResponseCode());
+				Assert.assertEquals(Response.RC_ERROR, response.getResponseCode());
 				Assert.assertEquals("author is required", response.getResponseDesc());
 			}
 		});
